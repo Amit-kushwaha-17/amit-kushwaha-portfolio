@@ -692,8 +692,7 @@
         modalPercentage.textContent = '12%';
         modalStatusStep.textContent = '> Establishing 256-bit handshake...';
 
-        modal.classList.remove('opacity-0', 'pointer-events-none');
-        modal.classList.add('opacity-100', 'pointer-events-auto');
+        modal.classList.add('active');
 
         // Dynamic Progress Animation
         let curProgress = 12;
@@ -745,8 +744,7 @@
             modalCloseBtn.classList.remove('hidden');
 
             const dismissModal = () => {
-              modal.classList.add('opacity-0', 'pointer-events-none');
-              modal.classList.remove('opacity-100', 'pointer-events-auto');
+              modal.classList.remove('active');
               resetFormControls();
             };
 
@@ -782,7 +780,7 @@
           modalTitle.textContent = 'ROUTING DIRECT SATELLITE...';
           modalDesc.textContent = 'Connecting direct fallback uplink to ensure transmission reaches Amit.';
           setTimeout(() => {
-            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.classList.remove('active');
             form.submit();
           }, 1200);
         } else {
