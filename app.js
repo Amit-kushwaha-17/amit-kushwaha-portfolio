@@ -616,6 +616,94 @@
         jumpToProgress(1);
       }
     });
+
+    // Initialize Transmission Form Uplink
+    setupContactForm();
+  }
+
+  function setupContactForm() {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+
+    const statusBanner = document.getElementById('transmission-status-banner');
+    const statusDot = document.getElementById('transmission-status-dot');
+    const statusText = document.getElementById('transmission-status-text');
+    const submitBtn = document.getElementById('transmission-submit-btn');
+    const btnText = document.getElementById('transmission-btn-text');
+    const btnIcon = document.getElementById('transmission-btn-icon');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      // Transmitting state
+      submitBtn.disabled = true;
+      submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
+      btnText.textContent = 'TRANSMITTING...';
+      btnIcon.textContent = 'sync';
+      btnIcon.classList.add('animate-spin');
+
+      statusDot.className = 'w-2 h-2 rounded-full bg-neon-cyan animate-pulse';
+      statusText.textContent = 'ENCRYPTING & ROUTING DISPATCH...';
+
+      if (statusBanner) {
+        statusBanner.className = 'hidden';
+      }
+
+      try {
+        const formData = new FormData(form);
+        const response = await fetch('https://formsubmit.co/ajax/amitkush9998@gmail.com', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json'
+          },
+          body: formData
+        });
+
+        const result = await response.json();
+
+        if (response.ok || result.success === 'true' || result.success === true) {
+          // Success Feedback
+          statusDot.className = 'w-2 h-2 rounded-full bg-neon-mint';
+          statusText.textContent = 'BURST TRANSMISSION DELIVERED';
+
+          btnText.textContent = 'TRANSMISSION SENT';
+          btnIcon.textContent = 'check_circle';
+          btnIcon.classList.remove('animate-spin');
+          submitBtn.classList.remove('bg-neon-pink', 'hover:bg-neon-magenta');
+          submitBtn.classList.add('bg-emerald-500');
+
+          if (statusBanner) {
+            statusBanner.className = 'block p-3.5 rounded-xl font-mono text-xs bg-neon-mint/10 border border-neon-mint/30 text-neon-mint';
+            statusBanner.innerHTML = '⚡ <strong>TELEMETRY RECEIVED:</strong> Transmission successfully routed to <em>amitkush9998@gmail.com</em> and <em>amitkush6152004@outlook.com</em>. Amit will respond promptly.';
+          }
+
+          form.reset();
+
+          setTimeout(() => {
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('opacity-80', 'cursor-not-allowed', 'bg-emerald-500');
+            submitBtn.classList.add('bg-neon-pink', 'hover:bg-neon-magenta');
+            btnText.textContent = 'SEND TRANSMISSION';
+            btnIcon.textContent = 'send';
+            statusDot.className = 'w-2 h-2 rounded-full bg-neon-mint';
+            statusText.textContent = 'BURST TRANSMISSION READY';
+          }, 6000);
+        } else {
+          throw new Error(result.message || 'Dispatch routing failed');
+        }
+      } catch (err) {
+        console.warn('AJAX uplink fallback triggered:', err);
+        // Direct browser fallback if fetch is blocked
+        statusDot.className = 'w-2 h-2 rounded-full bg-neon-pink';
+        statusText.textContent = 'ROUTING DIRECT SATELLITE UPLINK...';
+        form.submit();
+      }
+    });
   }
 
   function stepFrame(delta) {

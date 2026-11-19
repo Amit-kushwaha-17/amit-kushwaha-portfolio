@@ -1165,41 +1165,53 @@
 </div>
 <!-- Right: Transmission Terminal Form -->
 <div class="lg:col-span-7 bg-carbon-card/90 border border-white/10 p-6 sm:p-8 rounded-2xl">
-<form class="space-y-4" onsubmit="event.preventDefault(); alert('TRANSMISSION SENT! Amit has received your paddock dispatch.');">
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-<div>
-<label class="block font-mono text-xs text-gray-300 uppercase mb-2">CALLSIGN / NAME</label>
-<input class="w-full bg-obsidian/80 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-neon-pink focus:ring-1 focus:ring-neon-pink transition-all font-body" placeholder="e.g. Studio Director Alex" required="" type="text"/>
-</div>
-<div>
-<label class="block font-mono text-xs text-gray-300 uppercase mb-2">RADIO FREQUENCY / EMAIL</label>
-<input class="w-full bg-obsidian/80 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan transition-all font-body" placeholder="director@gamestudio.com" required="" type="email"/>
-</div>
-</div>
-<div>
-<label class="block font-mono text-xs text-gray-300 uppercase mb-2">MISSION TYPE // TELEMETRY SUBJECT</label>
-<select class="w-full bg-obsidian/80 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-neon-pink focus:ring-1 focus:ring-neon-pink transition-all font-body">
-<option>Full-Time Game Developer Role (Unity 3D / C#)</option>
-<option>3D Technical Artist &amp; Asset Pipeline Lead</option>
-<option>Model Context Protocol (MCP) Integration Project</option>
-<option>Racing Simulation / Shaders Contract</option>
-<option>Other Motorsport Paddock Inquiry</option>
-</select>
-</div>
-<div>
-<label class="block font-mono text-xs text-gray-300 uppercase mb-2">MESSAGE PAYLOAD // MISSION BRIEFING</label>
-<textarea class="w-full bg-obsidian/80 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-neon-pink focus:ring-1 focus:ring-neon-pink transition-all font-body" placeholder="Describe your game engine requirements, simulation goals, or timeline..." required="" rows="4"></textarea>
-</div>
-<div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-<div class="flex items-center gap-2 font-mono text-xs text-gray-400">
-<span class="w-2 h-2 rounded-full bg-neon-mint"></span>
-<span>BURST TRANSMISSION READY</span>
-</div>
-<button class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-neon-pink hover:bg-neon-magenta text-white font-mono text-xs uppercase tracking-wider font-bold shadow-[0_0_25px_rgba(255,45,120,0.4)] hover:shadow-[0_0_35px_rgba(255,45,120,0.6)] transition-all flex items-center justify-center gap-2" type="submit">
-<span>SEND TRANSMISSION</span>
-<span class="material-symbols-outlined text-base">send</span>
-</button>
-</div>
+<form id="contact-form" class="space-y-4" action="https://formsubmit.co/amitkush9998@gmail.com" method="POST">
+  <!-- FormSubmit Configuration: Delivering to both Gmail and Outlook -->
+  <input type="hidden" name="_cc" value="amitkush6152004@outlook.com"/>
+  <input type="hidden" name="_subject" value="⚡ New Portfolio Transmission // Dispatch from Studio / Recruiter"/>
+  <input type="hidden" name="_template" value="table"/>
+  <input type="hidden" name="_captcha" value="false"/>
+  <!-- Honeypot for spam prevention -->
+  <input type="text" name="_honey" style="display:none"/>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div>
+      <label class="block font-mono text-xs text-gray-300 uppercase mb-2">CALLSIGN / NAME</label>
+      <input name="callsign_name" class="w-full bg-obsidian/80 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-neon-pink focus:ring-1 focus:ring-neon-pink transition-all font-body" placeholder="e.g. Studio Director Alex" required="" type="text"/>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-300 uppercase mb-2">RADIO FREQUENCY / EMAIL</label>
+      <input name="radio_frequency_email" class="w-full bg-obsidian/80 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan transition-all font-body" placeholder="director@gamestudio.com" required="" type="email"/>
+    </div>
+  </div>
+  <div>
+    <label class="block font-mono text-xs text-gray-300 uppercase mb-2">MISSION TYPE // TELEMETRY SUBJECT</label>
+    <select name="mission_type" class="w-full bg-obsidian/80 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-neon-pink focus:ring-1 focus:ring-neon-pink transition-all font-body">
+      <option value="Full-Time Game Developer Role (Unity 3D / C#)">Full-Time Game Developer Role (Unity 3D / C#)</option>
+      <option value="3D Technical Artist & Asset Pipeline Lead">3D Technical Artist &amp; Asset Pipeline Lead</option>
+      <option value="Model Context Protocol (MCP) Integration Project">Model Context Protocol (MCP) Integration Project</option>
+      <option value="Racing Simulation / Shaders Contract">Racing Simulation / Shaders Contract</option>
+      <option value="Other Motorsport Paddock Inquiry">Other Motorsport Paddock Inquiry</option>
+    </select>
+  </div>
+  <div>
+    <label class="block font-mono text-xs text-gray-300 uppercase mb-2">MESSAGE PAYLOAD // MISSION BRIEFING</label>
+    <textarea name="message_payload" class="w-full bg-obsidian/80 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-neon-pink focus:ring-1 focus:ring-neon-pink transition-all font-body" placeholder="Describe your game engine requirements, simulation goals, or timeline..." required="" rows="4"></textarea>
+  </div>
+
+  <!-- Transmission Status Feedback Banner -->
+  <div id="transmission-status-banner" class="hidden p-3 rounded-xl font-mono text-xs border"></div>
+
+  <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+    <div class="flex items-center gap-2 font-mono text-xs text-gray-400">
+      <span class="w-2 h-2 rounded-full bg-neon-mint" id="transmission-status-dot"></span>
+      <span id="transmission-status-text">BURST TRANSMISSION READY</span>
+    </div>
+    <button id="transmission-submit-btn" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-neon-pink hover:bg-neon-magenta text-white font-mono text-xs uppercase tracking-wider font-bold shadow-[0_0_25px_rgba(255,45,120,0.4)] hover:shadow-[0_0_35px_rgba(255,45,120,0.6)] transition-all flex items-center justify-center gap-2" type="submit">
+      <span id="transmission-btn-text">SEND TRANSMISSION</span>
+      <span id="transmission-btn-icon" class="material-symbols-outlined text-base">send</span>
+    </button>
+  </div>
 </form>
 </div>
 </div>
