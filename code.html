@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+
+<html class="dark scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AMIT KUSHWAHA // Game Developer &amp; 3D Technical Artist</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300..900;1,300..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            obsidian: "#07070A",
+            carbon: "#0F1017",
+            "carbon-card": "#13141F",
+            "carbon-light": "#1A1C29",
+            neon: {
+              pink: "#FF2D78",
+              magenta: "#FF0055",
+              cyan: "#00F0FF",
+              mint: "#00FFA3",
+              purple: "#A855F7"
+            }
+          },
+          fontFamily: {
+            headline: ["Space Grotesk", "sans-serif"],
+            mono: ["Space Mono", "monospace"],
+            body: ["Chivo", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    @layer base {
+      html, body {
+        background-color: #07070a;
+        color: #e4e1e9;
+        font-family: 'Chivo', sans-serif;
+        overflow-x: hidden;
+      }
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #07070a; }
+    ::-webkit-scrollbar-thumb { background: #262838; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #ff2d78; }
+    .glass-panel {
+      background: rgba(19, 20, 31, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .glass-panel-hover {
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-panel-hover:hover {
+      border-color: rgba(255, 45, 120, 0.35);
+      box-shadow: 0 10px 30px -10px rgba(255, 45, 120, 0.2);
+      transform: translateY(-2px);
+    }
+    .text-glow-pink {
+      text-shadow: 0 0 20px rgba(255, 45, 120, 0.45);
+    }
+    .text-glow-cyan {
+      text-shadow: 0 0 20px rgba(0, 240, 255, 0.45);
+    }
+  </style>
+</head>
+<body class="selection:bg-neon-pink selection:text-white antialiased">
+<!-- TOP NAVIGATION BAR -->
+<header class="fixed top-0 inset-x-0 z-50 glass-panel border-b border-white/[0.06] bg-obsidian/80">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-6">
+<!-- Brand & Pilot Identity -->
+<a class="flex items-center gap-4 group" href="#">
+<div class="relative flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-neon-pink/20 to-neon-cyan/10 border border-white/10 group-hover:border-neon-pink/50 transition-colors">
+<span class="font-headline font-black text-neon-pink text-lg tracking-wider">07</span>
+<span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-neon-mint animate-pulse"></span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline font-bold text-base tracking-wide text-white uppercase group-hover:text-neon-pink transition-colors">
+            Amit Kushwaha
+          </span>
+<span class="font-mono text-[11px] text-gray-400 tracking-wider">
+            MCA PILOT <span class="text-neon-cyan">//</span> ENGINE READY
+          </span>
+</div>
+</a>
+<!-- Sleek GT7 Inspired Telemetry Nav -->
+<nav class="hidden lg:flex items-center gap-1 bg-carbon/80 border border-white/[0.08] px-3 py-1.5 rounded-full text-xs font-mono">
+<a class="px-3.5 py-1 rounded-full text-white bg-white/10 hover:text-white transition-all" href="#hero">GARAGE</a>
+<a class="px-3.5 py-1 rounded-full text-gray-400 hover:text-neon-cyan transition-all" href="#tech-specs">LOADOUT</a>
+<a class="px-3.5 py-1 rounded-full text-gray-400 hover:text-neon-pink transition-all" href="#telemetry">TELEMETRY</a>
+<a class="px-3.5 py-1 rounded-full text-gray-400 hover:text-neon-mint transition-all" href="#projects">PROJECTS</a>
+<a class="px-3.5 py-1 rounded-full text-gray-400 hover:text-neon-cyan transition-all" href="#credentials">LICENSES</a>
+<a class="px-3.5 py-1 rounded-full text-gray-400 hover:text-neon-pink transition-all" href="#contact">PIT CREW</a>
+</nav>
+<!-- Right Telemetry Metrics & Action Button -->
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center gap-2.5 px-3 py-1.5 rounded-lg bg-carbon border border-white/5 font-mono text-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-neon-mint"></span>
+<span class="text-gray-400">RPM:</span>
+<span class="text-neon-cyan font-bold">8,400</span>
+<span class="text-gray-600">|</span>
+<span class="text-gray-400">FPS:</span>
+<span class="text-neon-pink font-bold">60 4K</span>
+</div>
+<a class="relative group px-5 py-2.5 rounded-xl bg-gradient-to-r from-neon-pink to-neon-magenta text-white font-mono text-xs font-bold uppercase tracking-wider shadow-[0_0_24px_rgba(255,45,120,0.35)] hover:shadow-[0_0_32px_rgba(255,45,120,0.6)] hover:brightness-110 transition-all flex items-center gap-2" href="#contact">
+<span>HIRE DRIVER</span>
+<span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform">sports_score</span>
+</a>
+</div>
+</div>
+</header>
+<!-- HERO SECTION: DRIVER SHOWCASE & CAR -->
+<section class="relative pt-24 min-h-[92vh] flex items-center justify-center overflow-hidden" id="hero">
+<!-- Cinematic Full-Width Background Mask -->
+<div class="absolute inset-0 z-0">
+<img alt="Midnight Blossom Porsche 911 GT3" class="w-full h-full object-cover object-center filter brightness-[0.72] contrast-[1.08] scale-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAES4syaWBJLljanwZwQTRJPcTeGhGeyVi0H3eWSyLnkPwG5VzO7cgk2hLxI02umCqGKnRHoLR6NsjWSIOFRw_vry6dOgFRGzNkhUqlSL-YD0uxRAHOPjfuJ7YC_jdKrWhKdBeHdgIMi6NE4tbIqytGRN1IpQOgT7c1wO81sWTCxk-hWuCd9x2lb82LEmJO66ohRHqs8VS9pMbvshLSEcO7iaJD6IvXu9UZor_a-uIRXtqCzASgYvE62Q"/>
+<div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/60 to-obsidian/30"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-obsidian via-obsidian/40 to-transparent"></div>
+<!-- Subtle Digital Grid Overlay -->
+<div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neon-pink/10 via-transparent to-transparent pointer-events-none"></div>
+<div class="absolute inset-0 pointer-events-none opacity-15 bg-[linear-gradient(rgba(0,240,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,45,120,0.06)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+</div>
+<div class="relative z-10 max-w-7xl mx-auto px-6 py-16 w-full flex flex-col justify-between min-h-[82vh]">
+<!-- Top Status HUD Bar -->
+<div class="flex flex-wrap items-center justify-between gap-4 p-3.5 px-5 rounded-2xl glass-panel text-xs font-mono">
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center justify-center w-2 h-2 rounded-full bg-neon-mint ring-4 ring-neon-mint/20"></span>
+<span class="text-gray-300 font-medium">CHASSIS: PORSCHE 911 GT3-CYBER // MCA PROTOTYPE</span>
+</div>
+<div class="flex items-center gap-6 text-gray-400">
+<div>ENGINE: <span class="text-white font-bold">UNITY 3D URP</span></div>
+<div class="hidden sm:block">LATENCY: <span class="text-neon-cyan font-bold">0.42ms</span></div>
+<div class="hidden sm:block">STATUS: <span class="text-neon-mint font-bold">TRACK READY</span></div>
+</div>
+</div>
+<!-- Main Driver Typography & Statement -->
+<div class="my-auto py-12 max-w-3xl">
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.05] border border-white/10 mb-6 backdrop-blur-md">
+<span class="material-symbols-outlined text-neon-pink text-sm">verified</span>
+<span class="font-mono text-xs text-neon-pink tracking-widest uppercase font-bold">PILOT #07 // MCA GRADUATE</span>
+</div>
+<h1 class="font-headline text-5xl sm:text-7xl font-extrabold uppercase tracking-tight text-white mb-4 leading-none">
+          AMIT <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-pink via-[#ff5c98] to-neon-cyan">KUSHWAHA</span>
+</h1>
+<p class="font-mono text-sm sm:text-base text-neon-cyan tracking-wider uppercase font-semibold mb-6 flex items-center gap-2">
+<span>GAME DEVELOPER</span>
+<span class="text-neon-pink">/</span>
+<span>3D TECHNICAL ARTIST</span>
+<span class="text-neon-pink">/</span>
+<span>PIPELINE ENGINEER</span>
+</p>
+<p class="font-body text-base sm:text-lg text-gray-300 leading-relaxed max-w-2xl mb-8 font-light">
+          Crafting high-velocity interactive simulation experiences, procedural Unity 3D physics pipelines, custom HLSL shaders, and autonomous Model Context Protocol (MCP) tooling.
+        </p>
+<!-- Modern Sleek CTA Buttons -->
+<div class="flex flex-wrap items-center gap-4">
+<a class="px-7 py-3.5 rounded-xl bg-neon-pink text-white font-mono text-xs uppercase tracking-wider font-bold shadow-[0_0_25px_rgba(255,45,120,0.5)] hover:bg-neon-magenta hover:shadow-[0_0_35px_rgba(255,45,120,0.7)] transition-all flex items-center gap-2.5" href="#projects">
+<span class="material-symbols-outlined text-lg">sports_motorsports</span>
+<span>VIEW SHOWCASE / PROJECTS</span>
+</a>
+<a class="px-6 py-3.5 rounded-xl glass-panel text-white font-mono text-xs uppercase tracking-wider font-semibold hover:border-neon-cyan/50 hover:text-neon-cyan transition-all flex items-center gap-2" href="#tech-specs">
+<span class="material-symbols-outlined text-base">tune</span>
+<span>TELEMETRY SPECS</span>
+</a>
+<a class="px-6 py-3.5 rounded-xl bg-white/[0.03] border border-white/10 text-gray-300 hover:text-white hover:border-white/30 font-mono text-xs uppercase tracking-wider transition-all flex items-center gap-2" href="#contact">
+<span class="material-symbols-outlined text-base">cell_tower</span>
+<span>CONNECT WITH PIT CREW</span>
+</a>
+</div>
+</div>
+<!-- Quick Metrics Telemetry Dock -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="p-4 rounded-xl glass-panel border border-white/10">
+<div class="flex items-center justify-between text-gray-400 text-xs font-mono uppercase mb-2">
+<span>FIDELITY</span>
+<span class="material-symbols-outlined text-neon-cyan text-base">speed</span>
+</div>
+<div class="font-headline font-bold text-xl text-white">60 FPS <span class="text-xs text-neon-cyan font-mono">4K ULTRA</span></div>
+<div class="w-full bg-white/10 h-1 rounded-full mt-3 overflow-hidden">
+<div class="h-full bg-neon-cyan rounded-full w-[96%]"></div>
+</div>
+</div>
+<div class="p-4 rounded-xl glass-panel border border-white/10">
+<div class="flex items-center justify-between text-gray-400 text-xs font-mono uppercase mb-2">
+<span>CORE ENGINE</span>
+<span class="material-symbols-outlined text-neon-pink text-base">bolt</span>
+</div>
+<div class="font-headline font-bold text-xl text-white">UNITY 3D <span class="text-xs text-neon-pink font-mono">&amp; PHYSX</span></div>
+<div class="w-full bg-white/10 h-1 rounded-full mt-3 overflow-hidden">
+<div class="h-full bg-neon-pink rounded-full w-[94%]"></div>
+</div>
+</div>
+<div class="p-4 rounded-xl glass-panel border border-white/10">
+<div class="flex items-center justify-between text-gray-400 text-xs font-mono uppercase mb-2">
+<span>AUTOMATION</span>
+<span class="material-symbols-outlined text-neon-mint text-base">smart_toy</span>
+</div>
+<div class="font-headline font-bold text-xl text-white">MCP PROTOCOL <span class="text-xs text-neon-mint font-mono">AGENTS</span></div>
+<div class="w-full bg-white/10 h-1 rounded-full mt-3 overflow-hidden">
+<div class="h-full bg-neon-mint rounded-full w-[90%]"></div>
+</div>
+</div>
+<div class="p-4 rounded-xl glass-panel border border-white/10">
+<div class="flex items-center justify-between text-gray-400 text-xs font-mono uppercase mb-2">
+<span>3D PIPELINE</span>
+<span class="material-symbols-outlined text-neon-purple text-base">view_in_ar</span>
+</div>
+<div class="font-headline font-bold text-xl text-white">BLENDER 3D <span class="text-xs text-neon-purple font-mono">SHADERS</span></div>
+<div class="w-full bg-white/10 h-1 rounded-full mt-3 overflow-hidden">
+<div class="h-full bg-neon-purple rounded-full w-[92%]"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SKILLS & ENGINEERING LOADOUT -->
+<section class="py-24 bg-obsidian relative border-t border-white/[0.06]" id="tech-specs">
+<div class="max-w-7xl mx-auto px-6">
+<!-- Section Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+<div>
+<div class="flex items-center gap-2 font-mono text-xs text-neon-cyan uppercase tracking-widest mb-3">
+<span class="w-2 h-2 rounded-full bg-neon-cyan"></span>
+<span>DIAGNOSTIC BENCHMARK // TUNING LOADOUT</span>
+</div>
+<h2 class="font-headline text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white">
+            Engineering &amp; Tech Specs
+          </h2>
+</div>
+<p class="font-mono text-xs text-gray-400 bg-carbon px-4 py-2 rounded-xl border border-white/5">
+          RELEASE CONFIG: PRODUCTION HIGH-FIDELITY // 2025
+        </p>
+</div>
+<!-- 5-Card Precision Engineered Loadout Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1: Engine & 3D Core -->
+<div class="p-7 rounded-2xl glass-panel glass-panel-hover flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-5">
+<div class="w-12 h-12 rounded-xl bg-neon-pink/10 border border-neon-pink/20 flex items-center justify-center text-neon-pink">
+<span class="material-symbols-outlined text-2xl">sports_esports</span>
+</div>
+<span class="font-mono text-[11px] text-neon-pink bg-neon-pink/10 border border-neon-pink/20 px-2.5 py-1 rounded-md font-bold uppercase">
+                TIER S // CORE ENGINE
+              </span>
+</div>
+<h3 class="font-headline text-xl font-bold text-white mb-2 uppercase">Engine &amp; 3D Core</h3>
+<p class="font-body text-sm text-gray-400 mb-6 leading-relaxed">
+              Real-time physics engines, shader programming, and procedural asset pipelines.
+            </p>
+<div class="space-y-4 font-mono text-xs">
+<div>
+<div class="flex justify-between mb-1.5">
+<span class="text-gray-300">Unity 3D / C# Scripting</span>
+<span class="text-neon-pink font-bold">95%</span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-neon-pink rounded-full w-[95%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-1.5">
+<span class="text-gray-300">Blender 3D Modeling Pipeline</span>
+<span class="text-neon-pink font-bold">90%</span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-neon-pink rounded-full w-[90%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-1.5">
+<span class="text-gray-300">Model Context Protocol (MCP)</span>
+<span class="text-neon-pink font-bold">88%</span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-neon-pink rounded-full w-[88%]"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-6 mt-6 border-t border-white/5 flex flex-wrap gap-2 font-mono text-[10px] text-gray-400">
+<span class="px-2 py-1 bg-white/[0.04] rounded">PHYSX</span>
+<span class="px-2 py-1 bg-white/[0.04] rounded">HLSL / URP</span>
+<span class="px-2 py-1 bg-white/[0.04] rounded">RIGGING</span>
+<span class="px-2 py-1 bg-white/[0.04] rounded">UV UNWRAPPING</span>
+</div>
+</div>
+<!-- Card 2: Creative & VFX Suite -->
+<div class="p-7 rounded-2xl glass-panel glass-panel-hover flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-5">
+<div class="w-12 h-12 rounded-xl bg-neon-cyan/10 border border-neon-cyan/20 flex items-center justify-center text-neon-cyan">
+<span class="material-symbols-outlined text-2xl">movie_edit</span>
+</div>
+<span class="font-mono text-[11px] text-neon-cyan bg-neon-cyan/10 border border-neon-cyan/20 px-2.5 py-1 rounded-md font-bold uppercase">
+                TIER A // POST-FX
+              </span>
+</div>
+<h3 class="font-headline text-xl font-bold text-white mb-2 uppercase">Creative &amp; VFX Suite</h3>
+<p class="font-body text-sm text-gray-400 mb-6 leading-relaxed">
+              Cinematic grading, texture generation, keyframing, and video post-production.
+            </p>
+<div class="space-y-4 font-mono text-xs">
+<div>
+<div class="flex justify-between mb-1.5">
+<span class="text-gray-300">Adobe Premiere &amp; DaVinci</span>
+<span class="text-neon-cyan font-bold">92%</span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-neon-cyan rounded-full w-[92%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-1.5">
+<span class="text-gray-300">Adobe Photoshop</span>
+<span class="text-neon-cyan font-bold">94%</span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-neon-cyan rounded-full w-[94%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-1.5">
+<span class="text-gray-300">Adobe After Effects</span>
+<span class="text-neon-cyan font-bold">85%</span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-neon-cyan rounded-full w-[85%]"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-6 mt-6 border-t border-white/5 flex flex-wrap gap-2 font-mono text-[10px] text-gray-400">
+<span class="px-2 py-1 bg-white/[0.04] rounded">COLOR LUT</span>
+<span class="px-2 py-1 bg-white/[0.04] rounded">TEXTURE BAKING</span>
+<span class="px-2 py-1 bg-white/[0.04] rounded">TRAILER VFX</span>
+</div>
+</div>
+<!-- Card 3: Full-Stack & Architecture -->
+<div class="p-7 rounded-2xl glass-panel glass-panel-hover flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-5">
+<div class="w-12 h-12 rounded-xl bg-neon-mint/10 border border-neon-mint/20 flex items-center justify-center text-neon-mint">
+<span class="material-symbols-outlined text-2xl">terminal</span>
+</div>
+<span class="font-mono text-[11px] text-neon-mint bg-neon-mint/10 border border-neon-mint/20 px-2.5 py-1 rounded-md font-bold uppercase">
+                TIER S // LOGIC
+              </span>
+</div>
+<h3 class="font-headline text-xl font-bold text-white mb-2 uppercase">Full-Stack &amp; Architecture</h3>
+<p class="font-body text-sm text-gray-400 mb-6 leading-relaxed">
+              Enterprise server programming, object-oriented paradigms, and reactive web modules.
+            </p>
+<div class="space-y-4 font-mono text-xs">
+<div>
+<div class="flex justify-between mb-1.5">
+<span class="text-gray-300">Java (Core &amp; OOP)</span>
+<span class="text-neon-mint font-bold">90%</span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-neon-mint rounded-full w-[90%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-1.5">
+<span class="text-gray-300">JavaScript &amp; PHP</span>
+<span class="text-neon-mint font-bold">88%</span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-neon-mint rounded-full w-[88%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-1.5">
+<span class="text-gray-300">HTML5, Modern CSS3 &amp; Tailwind</span>
+<span class="text-neon-mint font-bold">92%</span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-neon-mint rounded-full w-[92%]"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-6 mt-6 border-t border-white/5 flex flex-wrap gap-2 font-mono text-[10px] text-gray-400">
+<span class="px-2 py-1 bg-white/[0.04] rounded">REST APIS</span>
+<span class="px-2 py-1 bg-white/[0.04] rounded">DOM RUNTIME</span>
+<span class="px-2 py-1 bg-white/[0.04] rounded">ASYNC I/O</span>
+</div>
+</div>
+<!-- Card 4: Database & Cloud Pipeline -->
+<div class="p-7 rounded-2xl glass-panel glass-panel-hover flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-5">
+<div class="w-12 h-12 rounded-xl bg-neon-purple/10 border border-neon-purple/20 flex items-center justify-center text-neon-purple">
+<span class="material-symbols-outlined text-2xl">database</span>
+</div>
+<span class="font-mono text-[11px] text-neon-purple bg-neon-purple/10 border border-neon-purple/20 px-2.5 py-1 rounded-md font-bold uppercase">
+                CLOUD &amp; DATA
+              </span>
+</div>
+<h3 class="font-headline text-xl font-bold text-white mb-2 uppercase">Database &amp; Cloud</h3>
+<p class="font-body text-sm text-gray-400 mb-6 leading-relaxed">
+              Real-time sync, structured relational schemas, and scalable CDN media repositories.
+            </p>
+<div class="space-y-2.5 font-mono text-xs">
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.02] border border-white/5">
+<span class="text-gray-300">MongoDB (NoSQL Document Store)</span>
+<span class="text-neon-cyan font-bold">ACTIVE</span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.02] border border-white/5">
+<span class="text-gray-300">Firebase (Auth, Realtime Sync)</span>
+<span class="text-neon-pink font-bold">SYNCED</span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.02] border border-white/5">
+<span class="text-gray-300">Cloudinary (CDN Asset Pipeline)</span>
+<span class="text-neon-mint font-bold">STREAM</span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.02] border border-white/5">
+<span class="text-gray-300">SQL / SQLite (Game State)</span>
+<span class="text-white font-bold">OPTIMIZED</span>
+</div>
+</div>
+</div>
+<div class="pt-6 mt-6 border-t border-white/5 flex flex-wrap gap-2 font-mono text-[10px] text-gray-400">
+<span class="px-2 py-1 bg-white/[0.04] rounded">TRANSACTIONS</span>
+<span class="px-2 py-1 bg-white/[0.04] rounded">CDN PIPELINES</span>
+</div>
+</div>
+<!-- Card 5: Mobile & Dev Tools -->
+<div class="p-7 rounded-2xl glass-panel glass-panel-hover flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-5">
+<div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-2xl">developer_mode</span>
+</div>
+<span class="font-mono text-[11px] text-gray-300 bg-white/10 border border-white/10 px-2.5 py-1 rounded-md font-bold uppercase">
+                TOOLING &amp; SDK
+              </span>
+</div>
+<h3 class="font-headline text-xl font-bold text-white mb-2 uppercase">Mobile &amp; Workflows</h3>
+<p class="font-body text-sm text-gray-400 mb-6 leading-relaxed">
+              Native Android packaging, distributed version control, and API testing harnesses.
+            </p>
+<div class="space-y-2.5 font-mono text-xs">
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.02] border border-white/5">
+<span class="text-gray-300">Android Studio (Native SDK)</span>
+<span class="text-neon-cyan font-bold">READY</span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.02] border border-white/5">
+<span class="text-gray-300">Git &amp; GitHub Paddock Repos</span>
+<span class="text-neon-pink font-bold">TRACKED</span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.02] border border-white/5">
+<span class="text-gray-300">Postman API Telemetry Checks</span>
+<span class="text-neon-mint font-bold">PASS 100%</span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.02] border border-white/5">
+<span class="text-gray-300">WebSockets / Realtime Streams</span>
+<span class="text-white font-bold">WIRED</span>
+</div>
+</div>
+</div>
+<div class="pt-6 mt-6 border-t border-white/5 flex flex-wrap gap-2 font-mono text-[10px] text-gray-400">
+<span class="px-2 py-1 bg-white/[0.04] rounded">APK COMPILATION</span>
+<span class="px-2 py-1 bg-white/[0.04] rounded">CI/CD HOOKS</span>
+</div>
+</div>
+<!-- Telemetry Tuning Ratio Highlight -->
+<div class="p-7 rounded-2xl glass-panel glass-panel-hover flex flex-col justify-between bg-gradient-to-br from-carbon-card to-carbon-light/30">
+<div>
+<div class="flex items-center justify-between mb-5">
+<div class="w-12 h-12 rounded-xl bg-neon-cyan/10 border border-neon-cyan/20 flex items-center justify-center text-neon-cyan">
+<span class="material-symbols-outlined text-2xl">donut_large</span>
+</div>
+<span class="font-mono text-[11px] text-neon-cyan bg-neon-cyan/10 border border-neon-cyan/20 px-2.5 py-1 rounded-md font-bold uppercase">
+                LOADOUT BALANCE
+              </span>
+</div>
+<h3 class="font-headline text-xl font-bold text-white mb-2 uppercase">Balanced Specialization</h3>
+<p class="font-body text-sm text-gray-400 mb-6 leading-relaxed">
+              Equally calibrated across 3D simulation engines, real-time rendering, and scalable system architecture.
+            </p>
+<div class="flex items-center justify-center py-2">
+<svg class="w-32 h-32 -rotate-90" viewbox="0 0 120 120">
+<circle cx="60" cy="60" fill="transparent" r="50" stroke="#1f2233" stroke-width="10"></circle>
+<circle cx="60" cy="60" fill="transparent" r="50" stroke="#FF2D78" stroke-dasharray="314.15" stroke-dashoffset="120" stroke-linecap="round" stroke-width="10"></circle>
+<circle cx="60" cy="60" fill="transparent" r="50" stroke="#00F0FF" stroke-dasharray="314.15" stroke-dashoffset="230" stroke-linecap="round" stroke-width="10"></circle>
+</svg>
+</div>
+</div>
+<div class="pt-4 border-t border-white/5 flex items-center justify-around font-mono text-[11px] text-gray-400">
+<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-neon-pink"></span> GAME DEV</span>
+<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-neon-cyan"></span> 3D PIPELINE</span>
+<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#1f2233]"></span> STACK</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CAREER TELEMETRY & PIT STOPS -->
+<section class="py-24 bg-carbon/50 relative border-t border-white/[0.06]" id="telemetry">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+<div>
+<div class="flex items-center gap-2 font-mono text-xs text-neon-pink uppercase tracking-widest mb-3">
+<span class="w-2 h-2 rounded-full bg-neon-pink animate-ping"></span>
+<span>RACE LOGS // LAP TIME ANALYSIS</span>
+</div>
+<h2 class="font-headline text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white">
+            Career Telemetry &amp; Pit Stops
+          </h2>
+</div>
+<div class="font-mono text-xs text-neon-mint bg-carbon px-4 py-2 rounded-xl border border-neon-mint/30 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-neon-mint animate-pulse"></span>
+          STATUS: PRO MOTORSPORT DEV READY
+        </div>
+</div>
+<!-- Akiyam Solutions Lap Telemetry Card -->
+<div class="relative glass-panel rounded-3xl p-8 sm:p-12 border border-white/10 overflow-hidden">
+<!-- Top Gradient Accent -->
+<div class="absolute top-0 right-0 w-72 h-1 bg-gradient-to-l from-neon-pink via-neon-cyan to-transparent"></div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left: Stint Details -->
+<div class="lg:col-span-4 flex flex-col justify-between">
+<div>
+<span class="inline-block font-mono text-xs font-bold text-neon-pink bg-neon-pink/10 border border-neon-pink/30 px-3 py-1 rounded-full uppercase mb-4">
+                LAP 01 // PROFESSIONAL STINT
+              </span>
+<h3 class="font-headline text-3xl font-extrabold uppercase text-white tracking-tight">
+                Akiyam Solutions
+              </h3>
+<p class="font-mono text-neon-cyan text-sm font-semibold mt-1">
+                SOFTWARE &amp; TECHNICAL INTERN
+              </p>
+<div class="flex items-center gap-2 font-mono text-xs text-gray-400 mt-3">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>DURATION: 6 MONTHS INTENSIVE</span>
+</div>
+</div>
+<!-- Stint XP & Completion Gauge -->
+<div class="mt-8 p-4 rounded-xl bg-white/[0.02] border border-white/5">
+<div class="flex justify-between font-mono text-xs text-gray-400 uppercase mb-2">
+<span>XP ACCUMULATION</span>
+<span class="text-neon-mint font-bold">+500 XP ACHIEVED</span>
+</div>
+<div class="w-full bg-white/5 h-2 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-neon-pink to-neon-cyan rounded-full w-full"></div>
+</div>
+<p class="font-mono text-[11px] text-gray-400 mt-3">
+                MISSION COMPLETED // RUNTIME ZERO DEFECTS
+              </p>
+</div>
+</div>
+<!-- Right: Milestone Deliverables Grid -->
+<div class="lg:col-span-8">
+<h4 class="font-mono text-xs text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-neon-pink text-base">flag</span>
+              KEY DELIVERABLES &amp; IMPACT
+            </h4>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="p-5 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors">
+<div class="flex items-center gap-2.5 text-neon-cyan font-headline font-bold text-base mb-2">
+<span class="material-symbols-outlined text-lg">web</span>
+<span>Responsive UI Modules</span>
+</div>
+<p class="font-body text-sm text-gray-300 leading-relaxed">
+                  Architected reactive, cross-browser web interfaces maintaining precision responsiveness across varying viewport spectrums.
+                </p>
+</div>
+<div class="p-5 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors">
+<div class="flex items-center gap-2.5 text-neon-pink font-headline font-bold text-base mb-2">
+<span class="material-symbols-outlined text-lg">hub</span>
+<span>Backend &amp; Asset Piping</span>
+</div>
+<p class="font-body text-sm text-gray-300 leading-relaxed">
+                  Engineered backend integrations, reducing data fetch latency and streamlining visual asset deployment for performance delivery.
+                </p>
+</div>
+<div class="p-5 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors">
+<div class="flex items-center gap-2.5 text-neon-mint font-headline font-bold text-base mb-2">
+<span class="material-symbols-outlined text-lg">dataset</span>
+<span>Query Optimizations</span>
+</div>
+<p class="font-body text-sm text-gray-300 leading-relaxed">
+                  Refactored SQL &amp; NoSQL queries, eliminating execution bottlenecks and accelerating dashboard metrics computation by 35%.
+                </p>
+</div>
+<div class="p-5 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors">
+<div class="flex items-center gap-2.5 text-neon-purple font-headline font-bold text-base mb-2">
+<span class="material-symbols-outlined text-lg">code_blocks</span>
+<span>Cross-Platform Engineering</span>
+</div>
+<p class="font-body text-sm text-gray-300 leading-relaxed">
+                  Standardized clean code conventions, version control branches, and documentation for client-facing software systems.
+                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FLAGSHIP RACING & 3D PROJECTS -->
+<section class="py-24 bg-obsidian relative border-t border-white/[0.06]" id="projects">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+<div>
+<div class="flex items-center gap-2 font-mono text-xs text-neon-cyan uppercase tracking-widest mb-3">
+<span class="w-2 h-2 rounded-full bg-neon-cyan"></span>
+<span>UNLOCKED TROPHIES // GAME MODES</span>
+</div>
+<h2 class="font-headline text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white">
+            Flagship 3D &amp; Racing Projects
+          </h2>
+</div>
+<p class="font-mono text-xs text-gray-400 bg-carbon px-4 py-2 rounded-xl border border-white/5">
+          PIPELINE: UNITY URP + BLENDER + SHADER GRAPH
+        </p>
+</div>
+<!-- 4 High-End Flagship Project Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Project 1: Midnight Drift -->
+<div class="group glass-panel rounded-3xl overflow-hidden glass-panel-hover flex flex-col justify-between">
+<div>
+<div class="relative h-64 sm:h-72 w-full overflow-hidden bg-carbon">
+<img alt="Midnight Drift Tokyo Simulator" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuGfQjC-1FF_pxOVUERgACLpkkKwQWqCz7KVwIo1zzWJS4TCkjG9rftUtOKTxp37OqjgQtI64pWv4Cb6RO2LKHczn2qL9-uNpAffIT1fXyFm4Hm_ZGKtf30RDeyznxF4lvjBZG9trV_2xLknyaFlE-CtSAffS9hIion8NTqZWh5EE5DHCt4LvrajyAwHpPISpV9YLBzqGInYa1mZ-CEfifkWMqUbKnpWoGlOnhDr5-"/>
+<div class="absolute inset-0 bg-gradient-to-t from-carbon-card via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4 px-3 py-1 rounded-full glass-panel border border-neon-pink/30 flex items-center gap-2">
+<span class="material-symbols-outlined text-neon-pink text-xs">emoji_events</span>
+<span class="font-mono text-[10px] text-neon-pink font-bold uppercase">SIMULATOR // TROPHY 01</span>
+</div>
+</div>
+<div class="p-7">
+<div class="flex items-center justify-between mb-3">
+<h3 class="font-headline text-2xl font-bold text-white uppercase group-hover:text-neon-pink transition-colors">
+                  Midnight Drift: Tokyo Blossom
+                </h3>
+</div>
+<p class="font-body text-sm text-gray-300 leading-relaxed mb-6">
+                High-fidelity physics-based driving simulator in Unity 3D with customized shader pipelines, audio-reactive exhaust sparks, and dynamic cherry blossom particle systems.
+              </p>
+<div class="flex flex-wrap gap-2 font-mono text-xs text-gray-400 mb-6">
+<span class="px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/5 text-neon-pink">Unity 3D</span>
+<span class="px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/5">Wheel Colliders</span>
+<span class="px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/5">VFX Particle Graph</span>
+<span class="px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/5">Custom Shaders</span>
+</div>
+</div>
+</div>
+<div class="px-7 pb-7 pt-2 flex items-center justify-between border-t border-white/5 font-mono text-xs">
+<span class="text-neon-mint font-bold">STAGE: PLAYABLE BUILD 1.0</span>
+<a class="text-white hover:text-neon-pink flex items-center gap-1 font-bold transition-colors" href="#contact">
+              INSPECT TELEMETRY <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Project 2: CyberPaddock MCP Agent -->
+<div class="group glass-panel rounded-3xl overflow-hidden glass-panel-hover flex flex-col justify-between">
+<div>
+<div class="relative h-64 sm:h-72 w-full overflow-hidden bg-carbon">
+<img alt="CyberPaddock MCP Protocol Agent" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQOdSOBP17gMYFKg3gZrgAgenCh9B0kdTfYO37wRYSWmMbviRTjXExQxqZ7jh1mLEx9CqosLi9rI1rA14ujNGO3WDt54H3Dcj_Dtk3sA_IursoTfKUhjmBKRZ4Yd4I-MuWQ74If5YqSBrk9JR9hcmKdWmu1EcMaD6zg5wHVMn0W_GDwqZrVyS55-cZfvtXn9cncMf2A4qiQ8BtUkl271ShFwPJY-tag_i4MmKrik4x"/>
+<div class="absolute inset-0 bg-gradient-to-t from-carbon-card via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4 px-3 py-1 rounded-full glass-panel border border-neon-cyan/30 flex items-center gap-2">
+<span class="material-symbols-outlined text-neon-cyan text-xs">emoji_events</span>
+<span class="font-mono text-[10px] text-neon-cyan font-bold uppercase">PIPELINE AGENT // TROPHY 02</span>
+</div>
+</div>
+<div class="p-7">
+<div class="flex items-center justify-between mb-3">
+<h3 class="font-headline text-2xl font-bold text-white uppercase group-hover:text-neon-cyan transition-colors">
+                  CyberPaddock MCP Agent
+                </h3>
+</div>
+<p class="font-body text-sm text-gray-300 leading-relaxed mb-6">
+                Autonomous server integration orchestrating asset pipelines between Blender and Unity via Model Context Protocol, enabling real-time hot-reloading of 3D vehicle tuning parts.
+              </p>
+<div class="flex flex-wrap gap-2 font-mono text-xs text-gray-400 mb-6">
+<span class="px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/5 text-neon-cyan">MCP Protocol</span>
+<span class="px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/5">Python Engine</span>
+<span class="px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/5">JSON-RPC</span>
+<span class="px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/5">Blender API</span>
+</div>
+</div>
+</div>
+<div class="px-7 pb-7 pt-2 flex items-center justify-between border-t border-white/5 font-mono text-xs">
+<span class="text-neon-cyan font-bold">STAGE: PRODUCTION READY</span>
+<a class="text-white hover:text-neon-cyan flex items-center gap-1 font-bold transition-colors" href="#contact">
+              INSPECT TELEMETRY <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Project 3: Nitro Rush Android -->
+<div class="group glass-panel rounded-3xl overflow-hidden glass-panel-hover flex flex-col justify-between">
+<div>
+<div class="relative h-64 sm:h-72 w-full overflow-hidden bg-carbon">
+<img alt="Nitro Rush Android Game" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZu-5u27Lai4-FIoD6TiZ3ridNqVaQye5zLBgtAWTStaBi0DImMcRmNmrnLImuRQMPRaAcNaagDnzVIdcUMUmI05RH8DU1Bs7rQM5obsVshv2uG0nAF4iu-apr1S1J4j5SfY09Qi50GJiUzMfXGIiAc6XhWvXZxXVeIhqWOUrThs5H_g9JY7VPC0P4jBCRjKT1Cc6drYtTp4XmTniYI2qZljl-yt5_XHNQeLGBuUXK"/>
+<div class="absolute inset-0 bg-gradient-to-t from-carbon-card via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4 px-3 py-1 rounded-full glass-panel border border-neon-mint/30 flex items-center gap-2">
+<span class="material-symbols-outlined text-neon-mint text-xs">emoji_events</span>
+<span class="font-mono text-[10px] text-neon-mint font-bold uppercase">MOBILE RACER // TROPHY 03</span>
+</div>
+</div>
+<div class="p-7">
+<div class="flex items-center justify-between mb-3">
+<h3 class="font-headline text-2xl font-bold text-white uppercase group-hover:text-neon-mint transition-colors">
+                  Nitro Rush Android
+                </h3>
+</div>
+<p class="font-body text-sm text-gray-300 leading-relaxed mb-6">
+                Mobile arcade racer optimized in Android Studio with SQLite local leaderboards, touch gyroscope steering, and Firebase cloud multiplayer sync.
+              </p>
+<div class="flex flex-wrap gap-2 font-mono text-xs text-gray-400 mb-6">
+<span class="px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/5 text-neon-mint">Android SDK</span>
+<span class="px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/5">Java / Kotlin</span>
+<span class="px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/5">SQLite DB</span>
+<span class="px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/5">Firebase</span>
+</div>
+</div>
+</div>
+<div class="px-7 pb-7 pt-2 flex items-center justify-between border-t border-white/5 font-mono text-xs">
+<span class="text-neon-mint font-bold">STAGE: APK COMPILED</span>
+<a class="text-white hover:text-neon-mint flex items-center gap-1 font-bold transition-colors" href="#contact">
+              INSPECT TELEMETRY <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Project 4: CineMotion VFX Reel -->
+<div class="group glass-panel rounded-3xl overflow-hidden glass-panel-hover flex flex-col justify-between">
+<div>
+<div class="relative h-64 sm:h-72 w-full overflow-hidden bg-carbon">
+<img alt="CineMotion VFX Showcase" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcCzemELh0bXmL4RASP01FqJPyYkTF47qbG2tf28BVSFEDvGG3kSd3Yeiqn-WaKg057kEYrxsq3BAfvINgt3nvVhiMsrX4rqIusXUi5J76HvXOtgfTf8bPABKgSbi6K_nQFlPvZ-R9sINHFwdg1vvsmPJgqYHCZ_Zm8X4GW4Ywrr82pPKojGM9AJQIDLcz0WgGQXnilUDd4Nn45Uxug5fNdMGtBiosNAG1nIbyfzQG"/>
+<div class="absolute inset-0 bg-gradient-to-t from-carbon-card via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4 px-3 py-1 rounded-full glass-panel border border-neon-purple/30 flex items-center gap-2">
+<span class="material-symbols-outlined text-neon-purple text-xs">emoji_events</span>
+<span class="font-mono text-[10px] text-neon-purple font-bold uppercase">POST-PRODUCTION // TROPHY 04</span>
+</div>
+</div>
+<div class="p-7">
+<div class="flex items-center justify-between mb-3">
+<h3 class="font-headline text-2xl font-bold text-white uppercase group-hover:text-neon-purple transition-colors">
+                  CineMotion VFX Showcase
+                </h3>
+</div>
+<p class="font-body text-sm text-gray-300 leading-relaxed mb-6">
+                Cinematic post-production showreel featuring custom DaVinci Resolve color grading, audio master synchronization, and After Effects motion graphics for racing trailers.
+              </p>
+<div class="flex flex-wrap gap-2 font-mono text-xs text-gray-400 mb-6">
+<span class="px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/5 text-neon-purple">DaVinci Resolve</span>
+<span class="px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/5">After Effects</span>
+<span class="px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/5">Color Grading</span>
+<span class="px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/5">Audio Sync</span>
+</div>
+</div>
+</div>
+<div class="px-7 pb-7 pt-2 flex items-center justify-between border-t border-white/5 font-mono text-xs">
+<span class="text-neon-purple font-bold">STAGE: 4K MASTERED</span>
+<a class="text-white hover:text-neon-purple flex items-center gap-1 font-bold transition-colors" href="#contact">
+              INSPECT TELEMETRY <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- EDUCATION & RACING LICENSES -->
+<section class="py-24 bg-carbon/40 relative border-t border-white/[0.06]" id="credentials">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+<div>
+<div class="flex items-center gap-2 font-mono text-xs text-neon-cyan uppercase tracking-widest mb-3">
+<span class="w-2 h-2 rounded-full bg-neon-cyan"></span>
+<span>QUALIFYING LAPS // PADDOCK LICENSING</span>
+</div>
+<h2 class="font-headline text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white">
+            Education &amp; Licensing
+          </h2>
+</div>
+<p class="font-mono text-xs text-gray-400 bg-carbon px-4 py-2 rounded-xl border border-white/5">
+          ISSUED BY OFFICIAL TECHNOLOGY REGULATORY BODIES
+        </p>
+</div>
+<!-- Clean Dual-Card Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Tier 1 Super License: MCA -->
+<div class="glass-panel p-8 sm:p-10 rounded-3xl relative overflow-hidden glass-panel-hover">
+<div class="absolute -right-12 -top-12 w-40 h-40 bg-neon-pink/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex items-start justify-between mb-6">
+<div>
+<span class="inline-flex items-center gap-1.5 font-mono text-[11px] font-bold text-neon-pink bg-neon-pink/10 border border-neon-pink/30 px-3 py-1 rounded-full uppercase mb-3">
+<span class="material-symbols-outlined text-xs">military_tech</span>
+<span>SUPER LICENCE // TIER 1 POST-GRADUATE</span>
+</span>
+<h3 class="font-headline text-2xl font-bold uppercase text-white">
+                Master of Computer Applications (MCA)
+              </h3>
+</div>
+<div class="w-12 h-12 rounded-xl bg-neon-pink/10 border border-neon-pink/20 flex items-center justify-center text-neon-pink shrink-0">
+<span class="material-symbols-outlined text-2xl">school</span>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-white/[0.02] border border-white/5 mb-6">
+<div class="flex items-center justify-between font-mono text-xs text-neon-cyan font-bold mb-1">
+<span>PARUL UNIVERSITY</span>
+<span>VADODARA, GUJARAT</span>
+</div>
+<p class="font-mono text-[11px] text-gray-400">
+              ADVANCED REAL-TIME COMPUTING &amp; HIGH PERFORMANCE ARCHITECTURE
+            </p>
+</div>
+<p class="font-body text-sm text-gray-300 leading-relaxed mb-6">
+            Specialized curriculum centering on real-time computational models, game engineering principles, distributed systems, and advanced algorithmic game physics.
+          </p>
+<div class="space-y-2 pt-4 border-t border-white/5 font-mono text-xs">
+<div class="flex justify-between">
+<span class="text-gray-400">Game Development Architecture</span>
+<span class="text-neon-pink font-bold">DISTINCTION</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-400">Cloud &amp; Protocol Integration</span>
+<span class="text-neon-cyan font-bold">DISTINCTION</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-400">Licensing Status</span>
+<span class="text-neon-mint font-bold">LICENSED &amp; QUALIFIED</span>
+</div>
+</div>
+</div>
+<!-- Tier 2 National License: BCA -->
+<div class="glass-panel p-8 sm:p-10 rounded-3xl relative overflow-hidden glass-panel-hover">
+<div class="absolute -right-12 -top-12 w-40 h-40 bg-neon-cyan/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex items-start justify-between mb-6">
+<div>
+<span class="inline-flex items-center gap-1.5 font-mono text-[11px] font-bold text-neon-cyan bg-neon-cyan/10 border border-neon-cyan/30 px-3 py-1 rounded-full uppercase mb-3">
+<span class="material-symbols-outlined text-xs">verified</span>
+<span>NATIONAL LICENCE // TIER 2 UNDERGRADUATE</span>
+</span>
+<h3 class="font-headline text-2xl font-bold uppercase text-white">
+                Bachelor of Computer Applications (BCA)
+              </h3>
+</div>
+<div class="w-12 h-12 rounded-xl bg-neon-cyan/10 border border-neon-cyan/20 flex items-center justify-center text-neon-cyan shrink-0">
+<span class="material-symbols-outlined text-2xl">workspace_premium</span>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-white/[0.02] border border-white/5 mb-6">
+<div class="flex items-center justify-between font-mono text-xs text-neon-cyan font-bold mb-1">
+<span>NARMADA COLLEGE OF SCIENCE &amp; COMMERCE</span>
+<span>BHARUCH, GUJARAT</span>
+</div>
+<p class="font-mono text-[11px] text-gray-400">
+              AFFILIATED WITH VEER NARMAD SOUTH GUJARAT UNIVERSITY (VNSGU)
+            </p>
+</div>
+<p class="font-body text-sm text-gray-300 leading-relaxed mb-6">
+            Formed rigorous grounding in data structures, relational database management systems, object-oriented software patterns, and network engineering.
+          </p>
+<div class="space-y-2 pt-4 border-t border-white/5 font-mono text-xs">
+<div class="flex justify-between">
+<span class="text-gray-400">Data Structures &amp; Algorithmic Logic</span>
+<span class="text-neon-cyan font-bold">HONORS</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-400">Database Management (RDBMS)</span>
+<span class="text-neon-cyan font-bold">HONORS</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-400">Licensing Status</span>
+<span class="text-neon-mint font-bold">CERTIFIED ALUMNUS</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- TRANSMIT TO PIT CREW (CONTACT FORM TERMINAL) -->
+<section class="py-24 bg-obsidian relative border-t border-white/[0.06]" id="contact">
+<div class="max-w-7xl mx-auto px-6">
+<div class="glass-panel rounded-3xl p-8 sm:p-14 border border-white/10 relative overflow-hidden">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+<!-- Left: Paddock Coordinates -->
+<div class="lg:col-span-5 flex flex-col justify-between h-full">
+<div>
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon-pink/10 border border-neon-pink/30 mb-4">
+<span class="w-1.5 h-1.5 rounded-full bg-neon-pink animate-ping"></span>
+<span class="font-mono text-xs text-neon-pink font-bold uppercase tracking-wider">RADIO CH 07 // FREQUENCY OPEN</span>
+</div>
+<h2 class="font-headline text-3xl sm:text-4xl font-extrabold uppercase text-white tracking-tight mb-4">
+                Transmit to Pit Crew
+              </h2>
+<p class="font-body text-gray-300 leading-relaxed mb-8">
+                Ready to enlist a high-velocity game developer and technical artist for AAA engines, boutique studios, and interactive simulation pipelines.
+              </p>
+<!-- Telemetry Metadata List -->
+<div class="space-y-3 font-mono text-xs mb-8">
+<div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-white/[0.02] border border-white/5">
+<div class="w-9 h-9 rounded-lg bg-neon-cyan/10 text-neon-cyan flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg">pin_drop</span>
+</div>
+<div>
+<div class="text-gray-400 text-[10px] uppercase">PRIMARY PADDOCK LOCATION</div>
+<div class="text-white font-bold">Bharuch / Vadodara, Gujarat, India</div>
+</div>
+</div>
+<div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-white/[0.02] border border-white/5">
+<div class="w-9 h-9 rounded-lg bg-neon-pink/10 text-neon-pink flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg">mail</span>
+</div>
+<div>
+<div class="text-gray-400 text-[10px] uppercase">DIRECT DISPATCH COMMS</div>
+<div class="text-neon-pink font-bold">amit.kushwaha.dev@outlook.com</div>
+</div>
+</div>
+<div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-white/[0.02] border border-white/5">
+<div class="w-9 h-9 rounded-lg bg-neon-mint/10 text-neon-mint flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg">military_tech</span>
+</div>
+<div>
+<div class="text-gray-400 text-[10px] uppercase">RECRUITMENT STATUS</div>
+<div class="text-white font-bold">Full-Time / Game Studio / Remote Pit Crew</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 font-mono text-[11px] text-gray-400">
+<span class="material-symbols-outlined text-neon-mint text-sm">lock</span>
+<span>256-BIT ENCRYPTED TELEMETRY STREAM</span>
+</div>
+</div>
+<!-- Right: Transmission Terminal Form -->
+<div class="lg:col-span-7 bg-carbon-card/90 border border-white/10 p-6 sm:p-8 rounded-2xl">
+<form class="space-y-4" onsubmit="event.preventDefault(); alert('TRANSMISSION SENT! Amit has received your paddock dispatch.');">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-mono text-xs text-gray-300 uppercase mb-2">CALLSIGN / NAME</label>
+<input class="w-full bg-obsidian/80 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-neon-pink focus:ring-1 focus:ring-neon-pink transition-all font-body" placeholder="e.g. Studio Director Alex" required="" type="text"/>
+</div>
+<div>
+<label class="block font-mono text-xs text-gray-300 uppercase mb-2">RADIO FREQUENCY / EMAIL</label>
+<input class="w-full bg-obsidian/80 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan transition-all font-body" placeholder="director@gamestudio.com" required="" type="email"/>
+</div>
+</div>
+<div>
+<label class="block font-mono text-xs text-gray-300 uppercase mb-2">MISSION TYPE // TELEMETRY SUBJECT</label>
+<select class="w-full bg-obsidian/80 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-neon-pink focus:ring-1 focus:ring-neon-pink transition-all font-body">
+<option>Full-Time Game Developer Role (Unity 3D / C#)</option>
+<option>3D Technical Artist &amp; Asset Pipeline Lead</option>
+<option>Model Context Protocol (MCP) Integration Project</option>
+<option>Racing Simulation / Shaders Contract</option>
+<option>Other Motorsport Paddock Inquiry</option>
+</select>
+</div>
+<div>
+<label class="block font-mono text-xs text-gray-300 uppercase mb-2">MESSAGE PAYLOAD // MISSION BRIEFING</label>
+<textarea class="w-full bg-obsidian/80 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-neon-pink focus:ring-1 focus:ring-neon-pink transition-all font-body" placeholder="Describe your game engine requirements, simulation goals, or timeline..." required="" rows="4"></textarea>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+<div class="flex items-center gap-2 font-mono text-xs text-gray-400">
+<span class="w-2 h-2 rounded-full bg-neon-mint"></span>
+<span>BURST TRANSMISSION READY</span>
+</div>
+<button class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-neon-pink hover:bg-neon-magenta text-white font-mono text-xs uppercase tracking-wider font-bold shadow-[0_0_25px_rgba(255,45,120,0.4)] hover:shadow-[0_0_35px_rgba(255,45,120,0.6)] transition-all flex items-center justify-center gap-2" type="submit">
+<span>SEND TRANSMISSION</span>
+<span class="material-symbols-outlined text-base">send</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- LUXURY TELEMETRY FOOTER -->
+<footer class="bg-obsidian border-t border-white/[0.08] py-8">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 font-mono text-xs">
+<div class="flex flex-wrap items-center gap-4 text-gray-400">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-neon-mint"></span>
+<span class="text-white font-bold">ONLINE</span>
+</div>
+<span class="text-white/20">|</span>
+<span>PING: <strong class="text-neon-cyan">12ms</strong></span>
+<span class="text-white/20">|</span>
+<span>TOKYO DRIFT SECTOR (35.6764° N, 139.6500° E)</span>
+</div>
+<div class="flex items-center gap-6 text-gray-400">
+<a class="hover:text-neon-pink transition-colors" href="#">GITHUB</a>
+<a class="hover:text-neon-cyan transition-colors" href="#">ARTSTATION</a>
+<a class="hover:text-neon-mint transition-colors" href="#">LINKEDIN</a>
+<span class="text-white/20">|</span>
+<span class="text-gray-500">© 2025 AMIT KUSHWAHA</span>
+</div>
+</div>
+</footer>
+</body></html>
