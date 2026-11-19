@@ -68,83 +68,169 @@
   function init() {
     setupCanvas();
     window.addEventListener('resize', setupCanvas);
+    window.addEventListener('orientationchange', () => {
+      setTimeout(setupCanvas, 150);
+    });
+    if (window.screen && window.screen.orientation) {
+      window.screen.orientation.addEventListener('change', () => {
+        setTimeout(setupCanvas, 150);
+      });
+    }
     loadAllFrames();
     bindEvents();
     requestAnimationFrame(renderLoop);
   }
 
   function setupCanvas() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const isMobile = window.innerWidth < 768;
+    const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2);
     canvas.width = Math.round(window.innerWidth * dpr);
     canvas.height = Math.round(window.innerHeight * dpr);
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = 'high';
 
-    if (renderedFrameIndex >= 0 && images[renderedFrameIndex]) {
+    if (renderedFrameIndex >= 0) {
       drawFrame(renderedFrameIndex);
     }
   }
 
+  // --- PROGRESSIVE STREAMING FRAME LOADER ---
   function loadAllFrames() {
-    const ringCircumference = 2 * Math.PI * 52; // r=52
+    const ringCircumference = 2 * Math.PI * 52;
+    const isMobile = window.innerWidth < 768;
+    const MIN_INTERACTIVE_FRAMES = isMobile ? 16 : 24;
 
-    for (let i = 1; i <= FRAME_COUNT; i++) {
+    // Create priority load order: Keyframes first, then in-between frames
+    const priorityIndices = [];
+    const secondaryIndices = [];
+
+    // First 8 frames are critical for initial scroll feel
+    for (let i = 1; i <= 8; i++) {
+      priorityIndices.push(i);
+    }
+
+    // Keyframe stride (every 3rd frame)
+    for (let i = 9; i <= FRAME_COUNT; i++) {
+      if (i % 3 === 0 || i === FRAME_COUNT) {
+        priorityIndices.push(i);
+      } else {
+        secondaryIndices.push(i);
+      }
+    }
+
+    let isSiteUnlocked = false;
+
+    // Safety timeout: Never keep mobile users stuck on preloader
+    setTimeout(() => {
+      if (!isSiteUnlocked && loadedCount >= 8) {
+        completeLoading();
+        isSiteUnlocked = true;
+      }
+    }, 3200);
+
+    // Skip / Enter button hook
+    const skipBtn = document.getElementById('btn-skip-loader');
+    if (skipBtn) {
+      skipBtn.addEventListener('click', () => {
+        if (!isSiteUnlocked) {
+          completeLoading();
+          isSiteUnlocked = true;
+        }
+      });
+    }
+
+    function fetchFrame(frameNum, isPriority) {
       const img = new Image();
-      const index = i - 1;
+      const index = frameNum - 1;
 
       img.onload = () => {
-        if (img.decode) {
-          img.decode().catch(() => {}).finally(() => onFrameLoaded(index, img, ringCircumference));
-        } else {
-          onFrameLoaded(index, img, ringCircumference);
+        images[index] = img;
+        loadedCount++;
+        const percent = Math.min(100, Math.round((loadedCount / FRAME_COUNT) * 100));
+
+        // Update preloader UI
+        if (loaderPercent) loaderPercent.textContent = `${percent}%`;
+        if (loaderFramesCount) loaderFramesCount.textContent = `Streaming ${loadedCount} / ${FRAME_COUNT} frames`;
+        if (statusFill) statusFill.style.width = `${percent}%`;
+
+        if (ringProgress) {
+          const offset = ringCircumference - (percent / 100) * ringCircumference;
+          ringProgress.style.strokeDashoffset = offset;
+        }
+
+        // Show skip/start button once initial batch is ready
+        if (skipBtn && loadedCount >= 12) {
+          skipBtn.style.display = 'inline-flex';
+        }
+
+        // Draw initial frame as soon as frame 1 arrives
+        if (index === 0 && renderedFrameIndex === -1) {
+          drawFrame(0);
+        }
+
+        // Fast mobile start: Unlock as soon as minimum interactive set is buffered
+        if (!isSiteUnlocked && loadedCount >= MIN_INTERACTIVE_FRAMES) {
+          completeLoading();
+          isSiteUnlocked = true;
         }
       };
 
       img.onerror = () => {
-        console.warn(`Failed loading frame ${i}`);
-        onFrameLoaded(index, img, ringCircumference);
+        loadedCount++;
       };
 
-      img.src = FRAME_PATH(i);
-      images[index] = img;
-    }
-  }
-
-  function onFrameLoaded(index, img, ringCircumference) {
-    loadedCount++;
-    const percent = Math.round((loadedCount / FRAME_COUNT) * 100);
-
-    // Update preloader UI
-    loaderPercent.textContent = `${percent}%`;
-    loaderFramesCount.textContent = `Buffering ${loadedCount} / ${FRAME_COUNT} frames`;
-    statusFill.style.width = `${percent}%`;
-
-    const offset = ringCircumference - (percent / 100) * ringCircumference;
-    ringProgress.style.strokeDashoffset = offset;
-
-    // First frame preview as soon as frame 0 is ready
-    if (index === 0) {
-      drawFrame(0);
+      img.src = FRAME_PATH(frameNum);
     }
 
-    if (loadedCount >= FRAME_COUNT) {
-      completeLoading();
-    }
+    // Step 1: Load priority keyframes immediately
+    priorityIndices.forEach((num) => fetchFrame(num, true));
+
+    // Step 2: Stream secondary in-between frames with slight delay to prevent mobile socket congestion
+    setTimeout(() => {
+      secondaryIndices.forEach((num) => fetchFrame(num, false));
+    }, isMobile ? 350 : 150);
   }
 
   function completeLoading() {
     setTimeout(() => {
-      preloader.classList.add('fade-out');
+      if (preloader) preloader.classList.add('fade-out');
       document.body.classList.remove('loading');
       drawFrame(0);
       updateScrollerProgress();
-    }, 350);
+
+      // Fade orientation banner after 4.5s
+      const orientationBanner = document.getElementById('orientation-banner');
+      if (orientationBanner) {
+        setTimeout(() => {
+          orientationBanner.style.opacity = '0';
+          setTimeout(() => orientationBanner.remove(), 600);
+        }, 4500);
+      }
+    }, 250);
   }
 
-  // --- CANVAS RENDERING (COVER FIT) ---
+  // Find nearest loaded frame so canvas never flickers or goes blank on mobile
+  function getNearestLoadedImage(targetIdx) {
+    if (images[targetIdx] && images[targetIdx].complete && images[targetIdx].naturalWidth > 0) {
+      return images[targetIdx];
+    }
+    for (let offset = 1; offset < FRAME_COUNT; offset++) {
+      const prev = targetIdx - offset;
+      if (prev >= 0 && images[prev] && images[prev].complete && images[prev].naturalWidth > 0) {
+        return images[prev];
+      }
+      const next = targetIdx + offset;
+      if (next < FRAME_COUNT && images[next] && images[next].complete && images[next].naturalWidth > 0) {
+        return images[next];
+      }
+    }
+    return null;
+  }
+
+  // --- CANVAS RENDERING (MOBILE OPTIMIZED FRAMING) ---
   function drawFrame(index) {
-    const img = images[index];
-    if (!img || !img.complete || img.naturalWidth === 0) return;
+    const img = getNearestLoadedImage(index);
+    if (!img) return;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -153,6 +239,8 @@
     const imgW = img.naturalWidth;
     const imgH = img.naturalHeight;
 
+    const isMobilePortrait = window.innerWidth < 768 && window.innerHeight > window.innerWidth;
+
     const hRatio = canvasW / imgW;
     const vRatio = canvasH / imgH;
     const ratio = Math.max(hRatio, vRatio);
@@ -160,7 +248,10 @@
     const drawW = imgW * ratio;
     const drawH = imgH * ratio;
     const drawX = (canvasW - drawW) * 0.5;
-    const drawY = (canvasH - drawH) * 0.5;
+
+    // In mobile portrait mode, bias vertical alignment slightly upward (0.35 instead of 0.5)
+    // so the car is prominently centered in the upper 60% viewport clear of bottom HUD cards!
+    const drawY = isMobilePortrait ? (canvasH - drawH) * 0.35 : (canvasH - drawH) * 0.5;
 
     ctx.drawImage(img, 0, 0, imgW, imgH, drawX, drawY, drawW, drawH);
     renderedFrameIndex = index;

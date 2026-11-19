@@ -104,10 +104,20 @@
         <div class="status-fill" id="status-fill"></div>
       </div>
       <div class="loader-meta">
-        <span id="loader-frames-count">Buffering 0 / 118 frames</span>
-        <span class="meta-tag">1080P MASTER</span>
+        <span id="loader-frames-count">Streaming 0 / 118 frames</span>
+        <span class="meta-tag">30 FPS MASTER</span>
       </div>
+      <button class="loader-skip-btn" id="btn-skip-loader" style="display: none;">
+        <span>ENTER GARAGE</span>
+        <svg style="width: 12px; height: 12px; fill: currentColor;" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      </button>
     </div>
+  </div>
+
+  <!-- MOBILE ORIENTATION PROMPT -->
+  <div class="mobile-orientation-banner" id="orientation-banner">
+    <span class="material-symbols-outlined text-sm">screen_rotation</span>
+    <span>Tip: Rotate for 30 FPS Cinema Mode</span>
   </div>
 
   <!-- FIXED CANVAS BACKGROUND -->
