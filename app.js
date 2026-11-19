@@ -632,6 +632,21 @@
     const btnText = document.getElementById('transmission-btn-text');
     const btnIcon = document.getElementById('transmission-btn-icon');
 
+    // Telemetry Progress Modal Elements
+    const modal = document.getElementById('transmission-modal');
+    const modalIcon = document.getElementById('modal-icon');
+    const modalIconContainer = document.getElementById('modal-icon-container');
+    const modalRadarPing = document.getElementById('modal-radar-ping');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc = document.getElementById('modal-desc');
+    const modalProgressFill = document.getElementById('modal-progress-fill');
+    const modalStatusStep = document.getElementById('modal-status-step');
+    const modalPercentage = document.getElementById('modal-percentage');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+
+    let progressInterval = null;
+    let autoCloseTimer = null;
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -640,7 +655,11 @@
         return;
       }
 
-      // Transmitting state
+      // 1. CAPTURE DATA & IMMEDIATELY CLEAR FORM (prevents multiple clicks / double-sending)
+      const formData = new FormData(form);
+      form.reset();
+
+      // 2. DISABLE BUTTON
       submitBtn.disabled = true;
       submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
       btnText.textContent = 'TRANSMITTING...';
@@ -654,8 +673,48 @@
         statusBanner.className = 'hidden';
       }
 
+      // 3. SHOW TELEMETRY PROGRESS POPUP
+      if (modal) {
+        if (autoCloseTimer) clearTimeout(autoCloseTimer);
+        if (progressInterval) clearInterval(progressInterval);
+
+        // Reset modal visual state
+        modalIcon.textContent = 'satellite_alt';
+        modalIcon.className = 'material-symbols-outlined text-3xl animate-pulse';
+        modalIconContainer.className = 'relative flex items-center justify-center w-16 h-16 rounded-2xl bg-neon-cyan/10 border border-neon-cyan/30 text-neon-cyan mb-5 transition-colors';
+        if (modalRadarPing) modalRadarPing.classList.remove('hidden');
+
+        modalTitle.textContent = 'ENCRYPTING DISPATCH...';
+        modalDesc.textContent = "Securing 256-bit handshake & routing payload to Amit Kushwaha's paddock receivers...";
+        modalCloseBtn.classList.add('hidden');
+
+        modalProgressFill.style.width = '12%';
+        modalPercentage.textContent = '12%';
+        modalStatusStep.textContent = '> Establishing 256-bit handshake...';
+
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+        modal.classList.add('opacity-100', 'pointer-events-auto');
+
+        // Dynamic Progress Animation
+        let curProgress = 12;
+        progressInterval = setInterval(() => {
+          if (curProgress < 85) {
+            curProgress += Math.floor(Math.random() * 12) + 6;
+            if (curProgress > 85) curProgress = 85;
+            modalProgressFill.style.width = curProgress + '%';
+            modalPercentage.textContent = curProgress + '%';
+
+            if (curProgress > 30 && curProgress < 60) {
+              modalStatusStep.textContent = '> Compiling mission payload & attachments...';
+            } else if (curProgress >= 60) {
+              modalStatusStep.textContent = '> Uplinking to FormSubmit dual-relay node...';
+            }
+          }
+        }, 180);
+      }
+
+      // 4. DISPATCH TRANSMISSION VIA AJAX
       try {
-        const formData = new FormData(form);
         const response = await fetch('https://formsubmit.co/ajax/amitkush9998@gmail.com', {
           method: 'POST',
           headers: {
@@ -667,7 +726,35 @@
         const result = await response.json();
 
         if (response.ok || result.success === 'true' || result.success === true) {
-          // Success Feedback
+          if (progressInterval) clearInterval(progressInterval);
+
+          // COMPLETE PROGRESS BAR TO 100%
+          if (modal) {
+            modalProgressFill.style.width = '100%';
+            modalPercentage.textContent = '100%';
+            modalStatusStep.textContent = '> Dispatch verified: 100% Delivered.';
+
+            modalTitle.textContent = 'TRANSMISSION DELIVERED ✓';
+            modalDesc.textContent = 'Your telemetry dispatch was safely routed to Amit Kushwaha at amitkush9998@gmail.com and outlook.';
+
+            modalIcon.textContent = 'check_circle';
+            modalIcon.className = 'material-symbols-outlined text-3xl';
+            modalIconContainer.className = 'relative flex items-center justify-center w-16 h-16 rounded-2xl bg-neon-mint/15 border border-neon-mint/50 text-neon-mint mb-5 shadow-[0_0_20px_rgba(0,255,163,0.3)] transition-colors';
+            if (modalRadarPing) modalRadarPing.classList.add('hidden');
+
+            modalCloseBtn.classList.remove('hidden');
+
+            const dismissModal = () => {
+              modal.classList.add('opacity-0', 'pointer-events-none');
+              modal.classList.remove('opacity-100', 'pointer-events-auto');
+              resetFormControls();
+            };
+
+            modalCloseBtn.onclick = dismissModal;
+            autoCloseTimer = setTimeout(dismissModal, 4500);
+          }
+
+          // In-Page Status Update
           statusDot.className = 'w-2 h-2 rounded-full bg-neon-mint';
           statusText.textContent = 'BURST TRANSMISSION DELIVERED';
 
@@ -681,29 +768,39 @@
             statusBanner.className = 'block p-3.5 rounded-xl font-mono text-xs bg-neon-mint/10 border border-neon-mint/30 text-neon-mint';
             statusBanner.innerHTML = '⚡ <strong>TELEMETRY RECEIVED:</strong> Transmission successfully routed to <em>amitkush9998@gmail.com</em> and <em>amitkush6152004@outlook.com</em>. Amit will respond promptly.';
           }
-
-          form.reset();
-
-          setTimeout(() => {
-            submitBtn.disabled = false;
-            submitBtn.classList.remove('opacity-80', 'cursor-not-allowed', 'bg-emerald-500');
-            submitBtn.classList.add('bg-neon-pink', 'hover:bg-neon-magenta');
-            btnText.textContent = 'SEND TRANSMISSION';
-            btnIcon.textContent = 'send';
-            statusDot.className = 'w-2 h-2 rounded-full bg-neon-mint';
-            statusText.textContent = 'BURST TRANSMISSION READY';
-          }, 6000);
         } else {
           throw new Error(result.message || 'Dispatch routing failed');
         }
       } catch (err) {
         console.warn('AJAX uplink fallback triggered:', err);
-        // Direct browser fallback if fetch is blocked
-        statusDot.className = 'w-2 h-2 rounded-full bg-neon-pink';
-        statusText.textContent = 'ROUTING DIRECT SATELLITE UPLINK...';
-        form.submit();
+        if (progressInterval) clearInterval(progressInterval);
+
+        if (modal) {
+          modalProgressFill.style.width = '100%';
+          modalPercentage.textContent = '100%';
+          modalStatusStep.textContent = '> Satellite fallback activated.';
+          modalTitle.textContent = 'ROUTING DIRECT SATELLITE...';
+          modalDesc.textContent = 'Connecting direct fallback uplink to ensure transmission reaches Amit.';
+          setTimeout(() => {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            form.submit();
+          }, 1200);
+        } else {
+          form.submit();
+        }
       }
     });
+
+    function resetFormControls() {
+      submitBtn.disabled = false;
+      submitBtn.classList.remove('opacity-80', 'cursor-not-allowed', 'bg-emerald-500');
+      submitBtn.classList.add('bg-neon-pink', 'hover:bg-neon-magenta');
+      btnText.textContent = 'SEND TRANSMISSION';
+      btnIcon.textContent = 'send';
+      btnIcon.classList.remove('animate-spin');
+      statusDot.className = 'w-2 h-2 rounded-full bg-neon-mint';
+      statusText.textContent = 'BURST TRANSMISSION READY';
+    }
   }
 
   function stepFrame(delta) {
