@@ -1,6 +1,6 @@
 # AMIT KUSHWAHA // Game Developer & 3D Technical Artist Portfolio
 
-A high-octane, motorsport-inspired portfolio and interactive showcase featuring an Apple-style **30 FPS canvas image sequence scroll animation**, custom Web Audio API synthesizer, and telemetry HUD loadouts.
+A high-octane, motorsport-inspired portfolio and interactive showcase featuring an Apple-style **60 FPS canvas image sequence scroll animation**, custom Web Audio API synthesizer, and telemetry HUD loadouts.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FAmit-kushwaha-17%2Famit-kushwaha-portfolio)
 
@@ -8,7 +8,7 @@ A high-octane, motorsport-inspired portfolio and interactive showcase featuring 
 
 ## ⚡ Overview & Features
 
-- **30 FPS Cinema Canvas Scroll Animation**:
+- **60 FPS Cinema Canvas Scroll Animation**:
   - 118 sequential 1080p frames rendered with High-DPI canvas cover-fit.
   - Sub-pixel physics LERP damping for buttery-smooth mousewheel and touch navigation.
   - Interactive dual-direction timeline scrubber with drag seeking and auto-cruise playback mode.
@@ -66,7 +66,7 @@ This repository is pre-configured with `vercel.json` for seamless zero-config de
 4. Framework Preset: **Other** (Root directory: `./`).
 5. Click **"Deploy"**.
 
-Your portfolio with the 30 FPS scroll animation will be instantly live worldwide with optimized Edge CDN caching for all 118 image frames.
+Your portfolio with the 60 FPS scroll animation will be instantly live worldwide with optimized Edge CDN caching for all 118 image frames.
 
 ---
 

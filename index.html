@@ -105,7 +105,7 @@
       </div>
       <div class="loader-meta">
         <span id="loader-frames-count">Streaming 0 / 118 frames</span>
-        <span class="meta-tag">30 FPS MASTER</span>
+        <span class="meta-tag">60 FPS MASTER</span>
       </div>
       <button class="loader-skip-btn" id="btn-skip-loader" style="display: none;">
         <span>ENTER GARAGE</span>
@@ -117,7 +117,7 @@
   <!-- MOBILE ORIENTATION PROMPT -->
   <div class="mobile-orientation-banner" id="orientation-banner">
     <span class="material-symbols-outlined text-sm">screen_rotation</span>
-    <span>Tip: Rotate for 30 FPS Cinema Mode</span>
+    <span>Tip: Rotate for 60 FPS Cinema Mode</span>
   </div>
 
   <!-- FIXED CANVAS BACKGROUND -->
@@ -225,15 +225,20 @@
       <div class="story-content hero-content">
         <div class="pill-badge">INTERMEDIATE-LEVEL GAME DEVELOPER // PILOT #07</div>
         <h1 class="hero-title">AMIT <span class="gradient-text">KUSHWAHA</span></h1>
-        <p class="hero-subtitle font-mono text-xs sm:text-sm text-neon-cyan tracking-widest uppercase font-semibold mb-3">
-          INTERMEDIATE-LEVEL GAME DEVELOPER <span class="text-neon-pink">/</span> 3D TECHNICAL ARTIST <span class="text-neon-pink">/</span> PIPELINE ENGINEER
-        </p>
-        <p class="font-body text-sm sm:text-base text-gray-300 max-w-2xl mx-auto leading-relaxed mb-6 font-light">
-          Intermediate-Level Game Developer and 3D Technical Artist with professional internship experience as <strong>Unity Game Developer Intern at Akiyam Solution</strong>. Specialized in <strong>Procedural Generation</strong>, Unity 3D physics pipelines, custom HLSL shaders, <strong>Git &amp; GitLab</strong> workflows, and <strong>40+ web games published on Furyplay.in</strong>.
-        </p>
+        
+        <!-- Greyish transparent background card for enhanced readability against background frames -->
+        <div class="hero-bio-card">
+          <p class="hero-subtitle font-mono text-xs sm:text-sm text-neon-cyan tracking-widest uppercase font-semibold">
+            INTERMEDIATE-LEVEL GAME DEVELOPER <span class="text-neon-pink">/</span> 3D TECHNICAL ARTIST <span class="text-neon-pink">/</span> PIPELINE ENGINEER
+          </p>
+          <p class="hero-bio-text font-body text-sm sm:text-base text-gray-200 leading-relaxed font-light">
+            Intermediate-Level Game Developer and 3D Technical Artist with professional internship experience as <strong class="text-white font-medium">Unity Game Developer Intern at Akiyam Solution</strong>. Specialized in <strong class="text-neon-cyan font-medium">Procedural Generation</strong>, Unity 3D physics pipelines, custom HLSL shaders, <strong class="text-white font-medium">Git &amp; GitLab</strong> workflows, and <strong class="text-neon-mint font-medium">40+ web games published on Furyplay.in</strong>.
+          </p>
+        </div>
+
         <div class="hero-meta-row">
           <div class="meta-item">
-            <span class="meta-val text-neon-cyan">30 FPS</span>
+            <span class="meta-val text-neon-cyan">60 FPS</span>
             <span class="meta-desc">Cinema Simulation</span>
           </div>
           <div class="meta-item">
@@ -249,7 +254,7 @@
           <div class="mouse-icon">
             <div class="wheel"></div>
           </div>
-          <span class="scroll-hint">SCROLL TO ZOOM INTO CHASSIS (30 FPS)</span>
+          <span class="scroll-hint">SCROLL TO ZOOM INTO CHASSIS (60 FPS)</span>
         </div>
       </div>
     </section>

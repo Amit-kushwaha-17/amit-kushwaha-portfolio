@@ -59,8 +59,8 @@
   let audioCtx = null;
   let synthNodes = null;
 
-  // 30 FPS Throttling
-  const TARGET_FPS = 30;
+  // 60 FPS Throttling
+  const TARGET_FPS = 60;
   const FRAME_INTERVAL = 1000 / TARGET_FPS;
   let lastFrameTime = 0;
 
@@ -257,14 +257,14 @@
     renderedFrameIndex = index;
   }
 
-  // --- PHYSICS & RENDER LOOP (30 FPS) ---
+  // --- PHYSICS & RENDER LOOP (60 FPS) ---
   function renderLoop(now) {
     requestAnimationFrame(renderLoop);
 
     if (now && lastFrameTime) {
       const elapsed = now - lastFrameTime;
       if (elapsed < FRAME_INTERVAL) {
-        return; // Skip tick to enforce strict 30 FPS
+        return; // Skip tick to enforce strict 60 FPS
       }
       lastFrameTime = now - (elapsed % FRAME_INTERVAL);
     } else {
@@ -273,9 +273,9 @@
 
     const trackHeight = scrollTrack.offsetHeight - window.innerHeight;
 
-    // Auto cruise playback (calibrated for 30 FPS)
+    // Auto cruise playback (calibrated for 60 FPS)
     if (isPlaying) {
-      targetProgress += (0.0036 * playSpeed);
+      targetProgress += (0.0018 * playSpeed);
       if (targetProgress > 1) {
         targetProgress = 0; // Seamless loop
       }

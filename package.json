@@ -1,7 +1,7 @@
 {
   "name": "amit-kushwaha-portfolio",
   "version": "1.0.0",
-  "description": "Amit Kushwaha — Intermediate Game Developer & 3D Technical Artist Portfolio with 30 FPS Canvas Scroll Animation",
+  "description": "Amit Kushwaha — Intermediate Game Developer & 3D Technical Artist Portfolio with 60 FPS Canvas Scroll Animation",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
